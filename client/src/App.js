@@ -2,17 +2,18 @@ import './App.css';
 import Navbar from './components/Navbar';
 import Card from './components/Card';
 import Login from './components/Login';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function App() {
   const [search, setSearch] = useState('');
   const [showLogin, setShowLogin] = useState(false);
+  const [snippets, setSnippets] = useState([]);
 
-  const snippets = [
-    { title: 'Array forEach example', language: 'JavaScript' },
-    { title: 'Python list comprehension', language: 'Python' },
-    { title: 'Java for loop', language: 'Java' },
-  ];
+  useEffect(() => {
+    fetch('http://localhost:5000/snippets')
+      .then(res => res.json())
+      .then(data => setSnippets(data));
+  }, []);
 
   const filtered = snippets.filter(snippet =>
     snippet.title.toLowerCase().includes(search.toLowerCase()) ||
