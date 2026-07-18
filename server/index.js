@@ -1,22 +1,37 @@
 const express = require('express');
 const cors = require('cors');
+const mongoose = require('mongoose');
+require('dotenv').config();
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('CodeSnip Server is running!');
-});
-const snippets = [
-  { id: 1, title: 'Array forEach example', language: 'JavaScript' },
-  { id: 2, title: 'Python list comprehension', language: 'Python' },
-  { id: 3, title: 'Java for loop', language: 'Java' },
-];
+// Connect to MongoDB
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log('MongoDB connected!'))
+  .catch(err => console.log('Error:', err));
 
-app.get('/snippets', (req, res) => {
+// Snippet Model
+const snippetSchema = new mongoose.Schema({
+  title: String,
+  language: String,
+  code: String,
+});
+
+const Snippet = mongoose.model('Snippet', snippetSchema);
+
+// Routes
+app.get('/snippets', async (req, res) => {
+  const snippets = await Snippet.find();
   res.json(snippets);
+});
+
+app.post('/snippets', async (req, res) => {
+  const snippet = new Snippet(req.body);
+  await snippet.save();
+  res.json(snippet);
 });
 
 app.listen(5000, () => {
