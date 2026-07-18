@@ -10,7 +10,7 @@ function App() {
   const [snippets, setSnippets] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/snippets')
+    fetch('https://codesnip-2dmh.onrender.com/snippets')
       .then(res => res.json())
       .then(data => setSnippets(data));
   }, []);
