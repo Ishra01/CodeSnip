@@ -2,117 +2,323 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-  background-color: #1e1e2e;
+  background-color: #0f0f1a;
   color: #ffffff;
+  min-height: 100vh;
 }
 
+/* NAVBAR */
 nav {
-  background-color: #313244;
-  padding: 15px 30px;
+  background-color: #1a1a2e;
+  padding: 15px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid #2d2d44;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 nav h2 {
-  color: #cba6f7;
+  color: #7c6af7;
+  font-size: 24px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 1px;
 }
 
 nav ul {
   list-style: none;
   display: flex;
-  gap: 20px;
+  gap: 30px;
+  align-items: center;
 }
 
 nav ul li {
-  color: #cdd6f4;
+  color: #a0a0b8;
   cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s;
 }
+
+nav ul li:hover {
+  color: #7c6af7;
+}
+
+nav ul li:last-child {
+  background-color: #7c6af7;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+nav ul li:last-child:hover {
+  background-color: #6a58e0;
+  color: white;
+}
+
+/* SEARCH BAR */
+input[type="text"] {
+  display: block;
+  margin: 30px auto;
+  width: 60%;
+  padding: 14px 20px;
+  border-radius: 30px;
+  border: 1px solid #2d2d44;
+  background-color: #1a1a2e;
+  color: #ffffff;
+  font-size: 15px;
+  outline: none;
+  transition: border 0.2s;
+}
+
+input[type="text"]:focus {
+  border-color: #7c6af7;
+}
+
+/* CARDS GRID */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+  padding: 20px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* CARD */
 .card {
-  background-color: #313244;
-  border-radius: 10px;
+  background-color: #1a1a2e;
+  border-radius: 12px;
   padding: 20px;
-  margin: 20px;
-  width: 350px;
+  border: 1px solid #2d2d44;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: #7c6af7;
 }
 
 .card h3 {
-  color: #cba6f7;
-  margin-bottom: 10px;
+  color: #ffffff;
+  font-size: 16px;
+  margin-bottom: 8px;
+  font-weight: 600;
 }
 
 .card p {
-  color: #a6e3a1;
+  color: #7c6af7;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   margin-bottom: 15px;
+  background-color: #2d2d44;
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 10px;
 }
 
 .card-buttons {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   margin-top: 15px;
 }
 
 .card-buttons button {
-  padding: 8px 15px;
+  padding: 7px 15px;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
-  background-color: #cba6f7;
-  color: #1e1e2e;
-  font-weight: bold;
+  font-size: 13px;
+  font-weight: 600;
+  transition: opacity 0.2s;
 }
+
+.card-buttons button:first-child {
+  background-color: #2d2d44;
+  color: #a0a0b8;
+}
+
+.card-buttons button:nth-child(2) {
+  background-color: #2d2d44;
+  color: #a0a0b8;
+}
+
+.card-buttons button:last-child {
+  background-color: #ff4444;
+  color: white;
+}
+
+.card-buttons button:hover {
+  opacity: 0.8;
+}
+
+/* AUTH PAGES */
 .auth-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 80px;
+  justify-content: center;
+  min-height: 80vh;
 }
 
 .auth-container h2 {
-  color: #cba6f7;
-  font-size: 28px;
+  color: #ffffff;
+  font-size: 32px;
   margin-bottom: 10px;
 }
 
-.auth-container p {
-  color: #cdd6f4;
+.auth-container > p {
+  color: #a0a0b8;
   margin-bottom: 30px;
 }
 
 .auth-form {
-  background-color: #313244;
+  background-color: #1a1a2e;
   padding: 40px;
-  border-radius: 12px;
+  border-radius: 16px;
+  border: 1px solid #2d2d44;
   display: flex;
   flex-direction: column;
   gap: 15px;
-  width: 350px;
+  width: 400px;
 }
 
 .auth-form input {
-  padding: 12px;
+  padding: 14px;
   border-radius: 8px;
-  border: none;
-  background-color: #1e1e2e;
+  border: 1px solid #2d2d44;
+  background-color: #0f0f1a;
   color: #ffffff;
   font-size: 14px;
+  outline: none;
+  transition: border 0.2s;
 }
+
+.auth-form input:focus {
+  border-color: #7c6af7;
+}
+
 .auth-form button {
-  padding: 12px;
+  padding: 14px;
   border-radius: 8px;
   border: none;
-  background-color: #cba6f7;
-  color: #1e1e2e;
+  background-color: #7c6af7;
+  color: #ffffff;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 700;
   cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.auth-form button:hover {
+  background-color: #6a58e0;
+}
+
+.auth-form p {
+  color: #a0a0b8;
+  text-align: center;
+  font-size: 14px;
 }
 
 .auth-form span {
-  color: #cba6f7;
+  color: #7c6af7;
   cursor: pointer;
+  font-weight: 600;
+}
+
+/* ADD/EDIT SNIPPET */
+.add-snippet-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.add-snippet-container h2 {
+  color: #ffffff;
+  font-size: 28px;
+  margin-bottom: 25px;
+}
+
+.add-snippet-form {
+  background-color: #1a1a2e;
+  padding: 30px;
+  border-radius: 16px;
+  border: 1px solid #2d2d44;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.add-snippet-form input {
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid #2d2d44;
+  background-color: #0f0f1a;
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
+}
+
+.add-snippet-form input:focus {
+  border-color: #7c6af7;
+}
+
+.add-snippet-form select {
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid #2d2d44;
+  background-color: #0f0f1a;
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
+}
+
+.add-snippet-form textarea {
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid #2d2d44;
+  background-color: #0f0f1a;
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
+  resize: vertical;
+  font-family: 'Courier New', monospace;
+}
+
+.add-snippet-form button {
+  padding: 14px;
+  border-radius: 8px;
+  border: none;
+  background-color: #7c6af7;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.add-snippet-form button:last-of-type {
+  background-color: #2d2d44;
+  color: #a0a0b8;
+}
+
+.add-snippet-form button:hover {
+  opacity: 0.8;
+}
+
+/* MESSAGE */
+.message {
+  color: #7c6af7;
+  text-align: center;
+  font-weight: 600;
 }

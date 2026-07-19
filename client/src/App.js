@@ -56,17 +56,19 @@ function App() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
-          {filtered.map((snippet, index) => (
-            <Card
-              key={index}
-              id={snippet._id}
-              title={snippet.title}
-              language={snippet.language}
-              code={snippet.code}
-              onDelete={handleDelete}
-              onEdit={() => handleEdit(snippet)}
-            />
-          ))}
+          <div className="cards-grid">
+            {filtered.map((snippet, index) => (
+              <Card
+                key={index}
+                id={snippet._id}
+                title={snippet.title}
+                language={snippet.language}
+                code={snippet.code}
+                onDelete={handleDelete}
+                onEdit={() => handleEdit(snippet)}
+              />
+            ))}
+          </div>
         </div>
       )}
       {page === 'login' && (
