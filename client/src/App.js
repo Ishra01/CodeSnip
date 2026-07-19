@@ -15,7 +15,10 @@ function App() {
   const isLoggedIn = !!localStorage.getItem('token');
 
   const fetchSnippets = () => {
-    fetch('https://codesnip-2dmh.onrender.com/snippets')
+    const token = localStorage.getItem('token');
+    fetch('https://codesnip-2dmh.onrender.com/snippets', {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
       .then(res => res.json())
       .then(data => setSnippets(data));
   };
@@ -24,13 +27,11 @@ function App() {
     fetchSnippets();
   }, []);
 
-  const fetchSnippets = () => {
-    const token = localStorage.getItem('token');
-    fetch('https://codesnip-2dmh.onrender.com/snippets', {
-      headers: { 'Authorization': `Bearer ${token}` }
-    })
-      .then(res => res.json())
-      .then(data => setSnippets(data));
+  const handleDelete = async (id) => {
+    await fetch(`https://codesnip-2dmh.onrender.com/snippets/${id}`, {
+      method: 'DELETE',
+    });
+    fetchSnippets();
   };
 
   const handleEdit = (snippet) => {
@@ -46,12 +47,12 @@ function App() {
   return (
     <div>
       <Navbar
-       onLoginClick={() => setPage('login')}
-       onHomeClick={() => setPage('home')}
-       onSignupClick={() => setPage('signup')}
-       onAddClick={() => setPage('add')}
-       isLoggedIn={isLoggedIn}
-/>
+        onLoginClick={() => setPage('login')}
+        onHomeClick={() => setPage('home')}
+        onSignupClick={() => setPage('signup')}
+        onAddClick={() => setPage('add')}
+        isLoggedIn={isLoggedIn}
+      />
       {page === 'home' && (
         <div>
           <input
