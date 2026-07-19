@@ -1,32 +1,43 @@
 import { useState } from 'react';
+import CodeMirror from '@uiw/react-codemirror';
+import { javascript } from '@codemirror/lang-javascript';
+import { python } from '@codemirror/lang-python';
+import { java } from '@codemirror/lang-java';
+import { oneDark } from '@codemirror/theme-one-dark';
 
 function AddSnippet({ onSnippetAdded }) {
   const [title, setTitle] = useState('');
-  const [language, setLanguage] = useState('');
+  const [language, setLanguage] = useState('JavaScript');
   const [code, setCode] = useState('');
   const [message, setMessage] = useState('');
+
+  const getLanguageExtension = () => {
+    switch (language) {
+      case 'Python': return [python()];
+      case 'Java': return [java()];
+      default: return [javascript()];
+    }
+  };
 
   const handleSubmit = async () => {
     if (!title || !language || !code) {
       setMessage('Please fill all fields!');
       return;
     }
-
     const token = localStorage.getItem('token');
     const response = await fetch('https://codesnip-2dmh.onrender.com/snippets', {
       method: 'POST',
-      headers: { 
+      headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify({ title, language, code }),
     });
-
     const data = await response.json();
     if (data._id) {
       setMessage('Snippet added successfully!');
       setTitle('');
-      setLanguage('');
+      setLanguage('JavaScript');
       setCode('');
       onSnippetAdded();
     }
@@ -46,7 +57,6 @@ function AddSnippet({ onSnippetAdded }) {
           value={language}
           onChange={(e) => setLanguage(e.target.value)}
         >
-          <option value="">Select Language</option>
           <option value="JavaScript">JavaScript</option>
           <option value="Python">Python</option>
           <option value="Java">Java</option>
@@ -54,11 +64,12 @@ function AddSnippet({ onSnippetAdded }) {
           <option value="CSS">CSS</option>
           <option value="HTML">HTML</option>
         </select>
-        <textarea
-          placeholder="Paste your code here..."
+        <CodeMirror
           value={code}
-          onChange={(e) => setCode(e.target.value)}
-          rows="10"
+          height="250px"
+          theme={oneDark}
+          extensions={getLanguageExtension()}
+          onChange={(value) => setCode(value)}
         />
         <button onClick={handleSubmit}>Save Snippet</button>
         {message && <p className="message">{message}</p>}
