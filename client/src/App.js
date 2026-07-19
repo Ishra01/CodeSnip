@@ -6,6 +6,8 @@ import Signup from './components/Signup';
 import AddSnippet from './components/AddSnippet';
 import EditSnippet from './components/EditSnippet';
 import { useState, useEffect } from 'react';
+import PublicSnippet from './components/PublicSnippet';
+import LandingPage from './components/LandingPage';
 
 function App() {
   const [search, setSearch] = useState('');
@@ -43,7 +45,13 @@ function App() {
     snippet.title.toLowerCase().includes(search.toLowerCase()) ||
     snippet.language.toLowerCase().includes(search.toLowerCase())
   );
+  const snippetId = window.location.pathname.startsWith('/snippet/') 
+    ? window.location.pathname.split('/snippet/')[1] 
+    : null;
 
+  if (snippetId) {
+    return <PublicSnippet snippetId={snippetId} />;
+  }
   return (
     <div>
       <Navbar
@@ -54,8 +62,14 @@ function App() {
        isLoggedIn={isLoggedIn}
        snippetCount={snippets.length}
 />
-      {page === 'home' && (
-        <div>
+      {page === 'home' && !isLoggedIn && (
+  <LandingPage
+    onLogin={() => setPage('login')}
+    onSignup={() => setPage('signup')}
+  />
+)}
+{page === 'home' && isLoggedIn && (
+  <div>
           <input
             type="text"
             placeholder="Search snippets..."

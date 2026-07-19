@@ -1,0 +1,139 @@
+/* LANDING PAGE */
+.landing {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.hero {
+  text-align: center;
+  padding: 100px 0 80px;
+}
+
+.hero h1 {
+  font-size: 52px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.hero-highlight {
+  color: #7c6af7 !important;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  color: #a0a0b8;
+  font-size: 18px;
+  max-width: 600px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.btn-primary {
+  padding: 14px 32px;
+  background-color: #7c6af7;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: #6a58e0;
+}
+
+.btn-secondary {
+  padding: 14px 32px;
+  background-color: transparent;
+  color: #7c6af7;
+  border: 2px solid #7c6af7;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+  background-color: #7c6af7;
+  color: white;
+}
+
+.features {
+  padding: 80px 0;
+  text-align: center;
+}
+
+.features h2 {
+  font-size: 36px;
+  color: #ffffff;
+  margin-bottom: 50px;
+  font-weight: 700;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.feature-card {
+  background-color: #1a1a2e;
+  border: 1px solid #2d2d44;
+  border-radius: 12px;
+  padding: 30px;
+  text-align: left;
+  transition: border-color 0.2s;
+}
+
+.feature-card:hover {
+  border-color: #7c6af7;
+}
+
+.feature-icon {
+  font-size: 32px;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.feature-card h3 {
+  color: #ffffff;
+  font-size: 18px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.feature-card p {
+  color: #a0a0b8;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.cta {
+  text-align: center;
+  padding: 80px 0;
+  border-top: 1px solid #2d2d44;
+}
+
+.cta h2 {
+  font-size: 36px;
+  color: #ffffff;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.cta p {
+  color: #a0a0b8;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
