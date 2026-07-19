@@ -1,12 +1,12 @@
-function Card(props) {
+function Card({ title, language, code, id, onDelete, onEdit }) {
   return (
     <div className="card">
-      <h3>{props.title}</h3>
-      <p>{props.language}</p>
+      <h3>{title}</h3>
+      <p>{language}</p>
       <div className="card-buttons">
-        <button>Copy</button>
-        <button>Edit</button>
-        <button>Delete</button>
+        <button onClick={() => navigator.clipboard.writeText(code)}>Copy</button>
+        <button onClick={onEdit}>Edit</button>
+        <button onClick={() => onDelete(id)}>Delete</button>
       </div>
     </div>
   );

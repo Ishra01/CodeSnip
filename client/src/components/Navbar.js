@@ -1,10 +1,11 @@
-function Navbar({ onLoginClick }) {
+function Navbar({ onLoginClick, onHomeClick, onSignupClick, onAddClick }) {
   return (
     <nav>
-      <h2>CodeSnip</h2>
+      <h2 onClick={onHomeClick} style={{ cursor: 'pointer' }}>CodeSnip</h2>
       <ul>
-        <li>Home</li>
-        <li>My Snippets</li>
+        <li onClick={onHomeClick}>Home</li>
+        <li onClick={onAddClick}>+ Add Snippet</li>
+        <li onClick={onSignupClick}>Sign Up</li>
         <li onClick={onLoginClick}>Login</li>
       </ul>
     </nav>

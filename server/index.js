@@ -55,6 +55,14 @@ app.delete('/snippets/:id', async (req, res) => {
   await Snippet.findByIdAndDelete(req.params.id);
   res.json({ message: 'Snippet deleted!' });
 });
+app.put('/snippets/:id', async (req, res) => {
+  const snippet = await Snippet.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true }
+  );
+  res.json(snippet);
+});
 
 app.listen(5000, () => {
   console.log('Server running on port 5000');

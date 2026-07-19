@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function Login() {
+function Login({ onSwitchToSignup }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -38,8 +38,8 @@ function Login() {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button onClick={handleLogin}>Login</button>
-        <p>{message}</p>
-        <p>Don't have an account? <span>Sign Up</span></p>
+        {message && <p className="message">{message}</p>}
+        <p>Don't have an account? <span onClick={onSwitchToSignup}>Sign Up</span></p>
       </div>
     </div>
   );
