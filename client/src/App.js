@@ -23,13 +23,15 @@ function App() {
     fetchSnippets();
   }, []);
 
-  const handleDelete = async (id) => {
-    await fetch(`https://codesnip-2dmh.onrender.com/snippets/${id}`, {
-      method: 'DELETE',
-    });
-    fetchSnippets();
+  const fetchSnippets = () => {
+    const token = localStorage.getItem('token');
+    fetch('https://codesnip-2dmh.onrender.com/snippets', {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
+      .then(res => res.json())
+      .then(data => setSnippets(data));
   };
-
+  
   const handleEdit = (snippet) => {
     setEditingSnippet(snippet);
     setPage('edit');

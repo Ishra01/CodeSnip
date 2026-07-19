@@ -13,9 +13,12 @@ function Login({ onSwitchToSignup }) {
     });
     const data = await response.json();
     if (data.token) {
-      localStorage.setItem('token', data.token);
-      setMessage('Login successful!');
-    } else {
+     localStorage.setItem('token', data.token);
+     localStorage.setItem('userId', data.userId);
+     setMessage('Login successful!');
+     setTimeout(() => window.location.reload(), 1000);
+     }
+     else {
       setMessage(data.message);
     }
   };

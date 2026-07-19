@@ -12,9 +12,13 @@ function AddSnippet({ onSnippetAdded }) {
       return;
     }
 
+    const token = localStorage.getItem('token');
     const response = await fetch('https://codesnip-2dmh.onrender.com/snippets', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
       body: JSON.stringify({ title, language, code }),
     });
 
