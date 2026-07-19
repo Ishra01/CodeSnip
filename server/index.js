@@ -1,7 +1,5 @@
-const OpenAI = require('openai');
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+const { GoogleGenerativeAI } = require('@google/generative-ai');
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -74,22 +72,18 @@ app.put('/snippets/:id', async (req, res) => {
   res.json(snippet);
 });
 app.post('/explain', async (req, res) => {
-  const { code, language } = req.body;
-  
-  const completion = await openai.chat.completions.create({
-    model: 'gpt-3.5-turbo',
-    messages: [
-      {
-        role: 'user',
-        content: `Explain this ${language} code in simple words:\n\n${code}`
-      }
-    ],
-    max_tokens: 300,
-  });
-
-  res.json({ explanation: completion.choices[0].message.content });
+  try {
+    const { code, language } = req.body;
+    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    const result = await model.generateContent(
+      `Explain this ${language} code in simple words:\n\n${code}`
+    );
+    const explanation = result.response.text();
+    res.json({ explanation });
+  } catch (error) {
+    res.status(500).json({ message: 'AI explanation failed!' });
+  }
 });
-
 app.listen(5000, () => {
   console.log('Server running on port 5000');
 });
