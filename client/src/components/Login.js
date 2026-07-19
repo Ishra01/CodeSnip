@@ -16,6 +16,7 @@ function Login({ onSwitchToSignup }) {
     if (data.token) {
       localStorage.setItem('token', data.token);
       localStorage.setItem('userId', data.userId);
+      localStorage.setItem('userEmail', email);
       setMessage('Login successful!');
       setTimeout(() => {
         window.location.href = '/';

@@ -23,6 +23,7 @@ const snippetSchema = new mongoose.Schema({
   language: String,
   code: String,
   userId: String,
+  isPublic: { type: Boolean, default: false },
 });
 const Snippet = mongoose.model('Snippet', snippetSchema);
 
@@ -85,6 +86,22 @@ app.post('/explain', async (req, res) => {
     console.log('Gemini error:', error.message);
     res.status(500).json({ message: error.message });
   }
+});
+app.get('/snippets/public/:id', async (req, res) => {
+  const snippet = await Snippet.findById(req.params.id);
+  if (!snippet || !snippet.isPublic) {
+    return res.status(404).json({ message: 'Snippet not found!' });
+  }
+  res.json(snippet);
+});
+
+app.patch('/snippets/:id/visibility', async (req, res) => {
+  const snippet = await Snippet.findByIdAndUpdate(
+    req.params.id,
+    { isPublic: req.body.isPublic },
+    { new: true }
+  );
+  res.json(snippet);
 });
 app.listen(5000, () => {
   console.log('Server running on port 5000');

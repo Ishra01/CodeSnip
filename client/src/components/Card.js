@@ -5,9 +5,10 @@ import { python } from '@codemirror/lang-python';
 import { java } from '@codemirror/lang-java';
 import { oneDark } from '@codemirror/theme-one-dark';
 
-function Card({ title, language, code, id, onDelete, onEdit }) {
+function Card({ title, language, code, id, onDelete, onEdit, isPublic, onVisibilityChange }) {
   const [explanation, setExplanation] = useState('');
   const [loading, setLoading] = useState(false);
+  const [public_, setPublic_] = useState(isPublic);
 
   const getLanguageExtension = () => {
     switch (language) {
@@ -30,9 +31,30 @@ function Card({ title, language, code, id, onDelete, onEdit }) {
     setLoading(false);
   };
 
+  const handleVisibility = async () => {
+    const newValue = !public_;
+    setPublic_(newValue);
+    await fetch(`https://codesnip-2dmh.onrender.com/snippets/${id}/visibility`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ isPublic: newValue }),
+    });
+    if (newValue) {
+      alert(`Public link: ${window.location.origin}/snippet/${id}`);
+    }
+  };
+
   return (
     <div className="card">
-      <h3>{title}</h3>
+      <div className="card-header-row">
+        <h3>{title}</h3>
+        <span
+          className={`visibility-badge ${public_ ? 'public' : 'private'}`}
+          onClick={handleVisibility}
+        >
+          {public_ ? '🌍 Public' : '🔒 Private'}
+        </span>
+      </div>
       <p>{language}</p>
       <CodeMirror
         value={code}

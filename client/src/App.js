@@ -47,12 +47,13 @@ function App() {
   return (
     <div>
       <Navbar
-        onLoginClick={() => setPage('login')}
-        onHomeClick={() => setPage('home')}
-        onSignupClick={() => setPage('signup')}
-        onAddClick={() => setPage('add')}
-        isLoggedIn={isLoggedIn}
-      />
+       onLoginClick={() => setPage('login')}
+       onHomeClick={() => setPage('home')}
+       onSignupClick={() => setPage('signup')}
+       onAddClick={() => setPage('add')}
+       isLoggedIn={isLoggedIn}
+       snippetCount={snippets.length}
+/>
       {page === 'home' && (
         <div>
           <input
@@ -69,6 +70,7 @@ function App() {
                 title={snippet.title}
                 language={snippet.language}
                 code={snippet.code}
+                isPublic={snippet.isPublic}
                 onDelete={handleDelete}
                 onEdit={() => handleEdit(snippet)}
               />

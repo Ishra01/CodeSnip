@@ -352,3 +352,59 @@ input[type="text"]:focus {
   font-size: 14px;
   line-height: 1.6;
 }
+.profile-menu {
+  position: relative;
+  cursor: pointer;
+}
+
+.profile-avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: #7c6af7;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.profile-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 45px;
+  background-color: #1a1a2e;
+  border: 1px solid #2d2d44;
+  border-radius: 12px;
+  padding: 15px;
+  width: 220px;
+  z-index: 100;
+}
+
+.profile-menu:hover .profile-dropdown {
+  display: block;
+}
+
+.profile-dropdown p {
+  color: #a0a0b8;
+  font-size: 14px;
+  padding: 8px 0;
+}
+
+.profile-dropdown hr {
+  border-color: #2d2d44;
+  margin: 8px 0;
+}
+
+.logout-btn {
+  color: #ff4444 !important;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.logout-btn:hover {
+  color: #ff6666 !important;
+}
