@@ -75,7 +75,7 @@ app.put('/snippets/:id', async (req, res) => {
 app.post('/explain', async (req, res) => {
   try {
     const { code, language } = req.body;
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
     const result = await model.generateContent(
       `Explain this ${language} code in simple words:\n\n${code}`
     );
