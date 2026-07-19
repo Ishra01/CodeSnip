@@ -82,7 +82,8 @@ app.post('/explain', async (req, res) => {
     const explanation = result.response.text();
     res.json({ explanation });
   } catch (error) {
-    res.status(500).json({ message: 'AI explanation failed!' });
+    console.log('Gemini error:', error.message);
+    res.status(500).json({ message: error.message });
   }
 });
 app.listen(5000, () => {
