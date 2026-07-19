@@ -5,10 +5,12 @@ import { python } from '@codemirror/lang-python';
 import { java } from '@codemirror/lang-java';
 import { oneDark } from '@codemirror/theme-one-dark';
 
+
 function Card({ title, language, code, id, onDelete, onEdit, isPublic, onVisibilityChange }) {
   const [explanation, setExplanation] = useState('');
   const [loading, setLoading] = useState(false);
   const [public_, setPublic_] = useState(isPublic);
+  const [copiedLink, setCopiedLink] = useState(false);
 
   const getLanguageExtension = () => {
     switch (language) {
@@ -40,8 +42,11 @@ function Card({ title, language, code, id, onDelete, onEdit, isPublic, onVisibil
       body: JSON.stringify({ isPublic: newValue }),
     });
     if (newValue) {
-      alert(`Public link: ${window.location.origin}/snippet/${id}`);
-    }
+  const link = `${window.location.origin}/snippet/${id}`;
+  navigator.clipboard.writeText(link);
+  setCopiedLink(true);
+  setTimeout(() => setCopiedLink(false), 3000);
+}
   };
 
   return (
@@ -71,7 +76,14 @@ function Card({ title, language, code, id, onDelete, onEdit, isPublic, onVisibil
       </div>
       {loading && <p className="explanation">🤖 Explaining...</p>}
       {explanation && <p className="explanation">{explanation}</p>}
+      {copiedLink && (
+  <div className="link-copied">
+    ✅ Public link copied to clipboard!
+  </div>
+)}
+    
     </div>
+    
   );
 }
 

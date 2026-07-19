@@ -9,7 +9,11 @@ function Navbar({ onLoginClick, onHomeClick, onSignupClick, onAddClick, isLogged
     <nav>
       <h2 onClick={onHomeClick} style={{ cursor: 'pointer' }}>CodeSnip</h2>
       <ul>
-        <li onClick={onHomeClick}>Home</li>
+        <li className="nav-home" onClick={() => {
+        console.log('Home clicked!');
+        onHomeClick();
+        }}>Home
+        </li>
         {isLoggedIn && <li onClick={onAddClick}>+ Add Snippet</li>}
         {!isLoggedIn && <li onClick={onSignupClick}>Sign Up</li>}
         {!isLoggedIn && <li onClick={onLoginClick}>Login</li>}

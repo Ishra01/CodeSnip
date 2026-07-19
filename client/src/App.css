@@ -574,3 +574,23 @@ input[type="text"]:focus {
   font-size: 16px;
   margin-bottom: 30px;
 }
+.nav-home {
+  color: #a0a0b8 !important;
+  background-color: transparent !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
+.nav-home:hover {
+  color: #7c6af7 !important;
+}
+.link-copied {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #1a472a;
+  color: #4ade80;
+  border-radius: 8px;
+  font-size: 13px;
+  text-align: center;
+  font-weight: 600;
+}
