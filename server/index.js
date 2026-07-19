@@ -1,3 +1,4 @@
+require('dotenv').config();
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const express = require('express');
@@ -6,7 +7,7 @@ const mongoose = require('mongoose');
 const User = require('./User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-require('dotenv').config();
+
 
 const app = express();
 
