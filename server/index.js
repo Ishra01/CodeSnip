@@ -51,6 +51,10 @@ app.post('/login', async (req, res) => {
   const token = jwt.sign({ id: user._id }, 'secretkey', { expiresIn: '1d' });
   res.json({ token });
 });
+app.delete('/snippets/:id', async (req, res) => {
+  await Snippet.findByIdAndDelete(req.params.id);
+  res.json({ message: 'Snippet deleted!' });
+});
 
 app.listen(5000, () => {
   console.log('Server running on port 5000');
