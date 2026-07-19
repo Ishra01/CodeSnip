@@ -342,3 +342,13 @@ input[type="text"]:focus {
   font-size: 18px;
   user-select: none;
 }
+.explanation {
+  margin-top: 15px;
+  padding: 15px;
+  background-color: #0f0f1a;
+  border-radius: 8px;
+  border-left: 3px solid #7c6af7;
+  color: #a0a0b8;
+  font-size: 14px;
+  line-height: 1.6;
+}

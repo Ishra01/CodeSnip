@@ -1,3 +1,7 @@
+const OpenAI = require('openai');
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -68,6 +72,22 @@ app.put('/snippets/:id', async (req, res) => {
     { new: true }
   );
   res.json(snippet);
+});
+app.post('/explain', async (req, res) => {
+  const { code, language } = req.body;
+  
+  const completion = await openai.chat.completions.create({
+    model: 'gpt-3.5-turbo',
+    messages: [
+      {
+        role: 'user',
+        content: `Explain this ${language} code in simple words:\n\n${code}`
+      }
+    ],
+    max_tokens: 300,
+  });
+
+  res.json({ explanation: completion.choices[0].message.content });
 });
 
 app.listen(5000, () => {
