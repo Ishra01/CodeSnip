@@ -5,6 +5,8 @@ function Signup({ onSwitchToLogin }) {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const validateEmail = (email) => {
     return email.includes('@') && email.includes('.');
@@ -53,18 +55,34 @@ function Signup({ onSwitchToLogin }) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <input
-          type="password"
-          placeholder="Password (min 8 characters)"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Confirm password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
+        <div className="password-container">
+          <input
+            type={showPassword ? 'text' : 'password'}
+            placeholder="Password (min 8 characters)"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <span
+            className="eye-icon"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? '👁️' : '🙈'}
+          </span>
+        </div>
+        <div className="password-container">
+          <input
+            type={showConfirm ? 'text' : 'password'}
+            placeholder="Confirm password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+          <span
+            className="eye-icon"
+            onClick={() => setShowConfirm(!showConfirm)}
+          >
+            {showConfirm ? '👁️' : '🙈'}
+          </span>
+        </div>
         <button onClick={handleSignup}>Create Account</button>
         {message && <p className="message">{message}</p>}
         <p>Already have an account? <span onClick={onSwitchToLogin}>Login</span></p>

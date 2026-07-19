@@ -322,3 +322,19 @@ input[type="text"]:focus {
   text-align: center;
   font-weight: 600;
 }
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-container input {
+  width: 100%;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 12px;
+  cursor: pointer;
+  font-size: 18px;
+}

@@ -4,6 +4,7 @@ function Login({ onSwitchToSignup }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async () => {
     const response = await fetch('https://codesnip-2dmh.onrender.com/login', {
@@ -13,12 +14,13 @@ function Login({ onSwitchToSignup }) {
     });
     const data = await response.json();
     if (data.token) {
-     localStorage.setItem('token', data.token);
-     localStorage.setItem('userId', data.userId);
-     setMessage('Login successful!');
-     setTimeout(() => window.location.reload(), 1000);
-     }
-     else {
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('userId', data.userId);
+      setMessage('Login successful!');
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 1000);
+    } else {
       setMessage(data.message);
     }
   };
@@ -34,12 +36,20 @@ function Login({ onSwitchToSignup }) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <input
-          type="password"
-          placeholder="Enter your password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <div className="password-container">
+          <input
+            type={showPassword ? 'text' : 'password'}
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <span
+            className="eye-icon"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? '👁️' : '🙈'}
+          </span>
+        </div>
         <button onClick={handleLogin}>Login</button>
         {message && <p className="message">{message}</p>}
         <p>Don't have an account? <span onClick={onSwitchToSignup}>Sign Up</span></p>

@@ -12,6 +12,7 @@ function App() {
   const [page, setPage] = useState('home');
   const [snippets, setSnippets] = useState([]);
   const [editingSnippet, setEditingSnippet] = useState(null);
+  const isLoggedIn = !!localStorage.getItem('token');
 
   const fetchSnippets = () => {
     fetch('https://codesnip-2dmh.onrender.com/snippets')
@@ -31,7 +32,7 @@ function App() {
       .then(res => res.json())
       .then(data => setSnippets(data));
   };
-  
+
   const handleEdit = (snippet) => {
     setEditingSnippet(snippet);
     setPage('edit');
@@ -45,11 +46,12 @@ function App() {
   return (
     <div>
       <Navbar
-        onLoginClick={() => setPage('login')}
-        onHomeClick={() => setPage('home')}
-        onSignupClick={() => setPage('signup')}
-        onAddClick={() => setPage('add')}
-      />
+       onLoginClick={() => setPage('login')}
+       onHomeClick={() => setPage('home')}
+       onSignupClick={() => setPage('signup')}
+       onAddClick={() => setPage('add')}
+       isLoggedIn={isLoggedIn}
+/>
       {page === 'home' && (
         <div>
           <input
