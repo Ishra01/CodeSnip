@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { EyeIcon, EyeOffIcon } from './icons';
 
 function Login({ onSwitchToSignup }) {
   const [email, setEmail] = useState('');
@@ -48,7 +49,7 @@ function Login({ onSwitchToSignup }) {
             className="eye-icon"
             onClick={() => setShowPassword(!showPassword)}
           >
-            {showPassword ? '👁️' : '🙈'}
+            {showPassword ? <EyeOffIcon /> : <EyeIcon />}
           </span>
         </div>
         <button onClick={handleLogin}>Login</button>

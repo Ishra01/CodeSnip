@@ -4,6 +4,7 @@ import { javascript } from '@codemirror/lang-javascript';
 import { python } from '@codemirror/lang-python';
 import { java } from '@codemirror/lang-java';
 import { oneDark } from '@codemirror/theme-one-dark';
+import { XCircleIcon } from './icons';
 
 function PublicSnippet({ snippetId }) {
   const [snippet, setSnippet] = useState(null);
@@ -29,7 +30,7 @@ function PublicSnippet({ snippetId }) {
 
   if (error) return (
     <div className="auth-container">
-      <h2>❌ Snippet not found!</h2>
+      <h2><XCircleIcon width={22} height={22} /> Snippet not found!</h2>
       <p>This snippet is private or doesn't exist.</p>
     </div>
   );

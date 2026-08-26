@@ -4,6 +4,7 @@ import { javascript } from '@codemirror/lang-javascript';
 import { python } from '@codemirror/lang-python';
 import { java } from '@codemirror/lang-java';
 import { oneDark } from '@codemirror/theme-one-dark';
+import { GlobeIcon, LockIcon, SparklesIcon, BotIcon, CheckCircleIcon } from './icons';
 
 
 function Card({ title, language, code, id, onDelete, onEdit, isPublic, onVisibilityChange }) {
@@ -57,7 +58,7 @@ function Card({ title, language, code, id, onDelete, onEdit, isPublic, onVisibil
           className={`visibility-badge ${public_ ? 'public' : 'private'}`}
           onClick={handleVisibility}
         >
-          {public_ ? '🌍 Public' : '🔒 Private'}
+          {public_ ? <><GlobeIcon width={13} height={13} /> Public</> : <><LockIcon width={13} height={13} /> Private</>}
         </span>
       </div>
       <p>{language}</p>
@@ -71,14 +72,14 @@ function Card({ title, language, code, id, onDelete, onEdit, isPublic, onVisibil
       <div className="card-buttons">
         <button onClick={() => navigator.clipboard.writeText(code)}>Copy</button>
         <button onClick={onEdit}>Edit</button>
-        <button onClick={handleExplain}>✨ Explain</button>
-        <button onClick={() => onDelete(id)}>Delete</button>
+        <button className="btn-explain" onClick={handleExplain}><SparklesIcon width={14} height={14} /> Explain</button>
+        <button className="btn-delete" onClick={() => onDelete(id)}>Delete</button>
       </div>
-      {loading && <p className="explanation">🤖 Explaining...</p>}
+      {loading && <p className="explanation"><BotIcon width={14} height={14} /> Explaining...</p>}
       {explanation && <p className="explanation">{explanation}</p>}
       {copiedLink && (
   <div className="link-copied">
-    ✅ Public link copied to clipboard!
+    <CheckCircleIcon width={14} height={14} /> Public link copied to clipboard!
   </div>
 )}
     

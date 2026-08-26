@@ -1,3 +1,5 @@
+import { MailIcon, FileTextIcon, LogOutIcon } from './icons';
+
 function Navbar({ onLoginClick, onHomeClick, onSignupClick, onAddClick, isLoggedIn, snippetCount }) {
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -23,10 +25,10 @@ function Navbar({ onLoginClick, onHomeClick, onSignupClick, onAddClick, isLogged
               {localStorage.getItem('userEmail')?.[0]?.toUpperCase() || 'U'}
             </div>
             <div className="profile-dropdown">
-              <p>📧 {localStorage.getItem('userEmail')}</p>
-              <p>📝 {snippetCount} Snippets saved</p>
+              <p><MailIcon width={15} height={15} /> {localStorage.getItem('userEmail')}</p>
+              <p><FileTextIcon width={15} height={15} /> {snippetCount} Snippets saved</p>
               <hr />
-              <p onClick={handleLogout} className="logout-btn">🚪 Logout</p>
+              <p onClick={handleLogout} className="logout-btn"><LogOutIcon width={15} height={15} /> Logout</p>
             </div>
           </li>
         )}
